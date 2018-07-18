@@ -49,6 +49,10 @@ MSGS = {
               on an old style class while this is relying on new style \
               classes features.',
               {'maxversion': (3, 0)}),
+    'W1002': ('Use of one-argument super',
+              'one-argument-super-call',
+              'Used when the one-argument form of super is used, which is \
+              generally not what a user wants.'),
     'C1001': ('Old-style class defined.',
               'old-style-class',
               'Used when a class is defined that does not inherit from another '
@@ -106,7 +110,8 @@ class NewStyleConflictChecker(BaseChecker):
                 self.add_message('property-on-old-class', node=node,
                                  confidence=confidence)
 
-    @check_messages('super-on-old-class', 'bad-super-call', 'missing-super-argument')
+    @check_messages('super-on-old-class', 'bad-super-call', 'missing-super-argument',
+                    'one-argument-super-call')
     def visit_functiondef(self, node):
         """check use of super"""
         # ignore actual functions or method within a new style class
@@ -141,6 +146,10 @@ class NewStyleConflictChecker(BaseChecker):
                     else:
                         self.add_message('missing-super-argument', node=call)
                         continue
+
+                if len(call.args) == 1:
+                    # super called with one argument is almost always an error
+                    self.add_message('one-argument-super-call', node=call)
 
                 # calling super(type(self), self) can lead to recursion loop
                 # in derived classes

@@ -1,5 +1,6 @@
 # pylint: disable=too-few-public-methods,import-error, no-absolute-import,missing-docstring
 # pylint: disable=useless-super-delegation,wrong-import-position,invalid-name, wrong-import-order
+# pylint: disable=one-argument-super-call
 
 from unknown import Missing
 
@@ -96,6 +97,7 @@ class InvalidSuperChecks(BaseClass):
         # Even though BaseClass has a __getattr__, that won't
         # be called.
         super(InvalidSuperChecks, self).attribute_error() # [no-member]
+        super(InvalidSuperChecks).function(42) # [one-argument-super-call]
 
 
 

@@ -12,10 +12,11 @@ Release date: |TBA|
 
       Close #1120 and #2280
 
-
     * `in` is considered iterating context for some of the Python 3 porting checkers
 
       Close #2186
+
+    * Added 'one-argument-super-call' check to catch suspicious super usage
 
 
 What's New in Pylint 1.9.2?

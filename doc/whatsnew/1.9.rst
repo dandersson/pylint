@@ -66,6 +66,9 @@ New checkers
       [i for i in some_iterator if some_condition(i)]
       print(i) # This will raise a NameError on Python 3
 
+* Added a new `one-argument-super-call` check to warn about suspicious ``super`` usage. The
+  one-argument form is almost never what a user wants, especially not since the advent of new-style
+  classes quite some time ago.
 
 Other Changes
 =============
